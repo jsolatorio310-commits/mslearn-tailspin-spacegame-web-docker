@@ -14,8 +14,6 @@ stages:
     displayName: 'Build job'
     pool:
       vmImage: 'ubuntu-20.04'
-      demands:
-      - npm
     steps:
     - task: Docker@2
       displayName: 'Build and push the image to container registry'
@@ -35,13 +33,12 @@ stages:
   - job: 'Deploy'
     displayName: 'Deploy job'
     pool:
-      vmImage: 'ubuntu-latest'
-    environment: spike
+      vmImage: 'ubuntu-20.04'
     variables:
     - group: Release
     steps:
     - task: AzureWebAppContainer@1
       inputs:
        appName: $(WebAppName)
-       azureSubscription: 'docker aks exercise'
+       azureSubscription: 'Resource Manager - Tailspin - Space Game'
        imageName: $(RegistryName)/$(webRepository):$(build.buildId)
