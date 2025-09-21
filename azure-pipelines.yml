@@ -39,7 +39,7 @@ stages:
     steps:
     - task: AzureWebAppContainer@1
       inputs:
-       appName: docker-image-app-6575738
+       appName: docker-exercise-app
        azureSubscription: 'docker aks exercise'
        containers: 'dockerexercise.azurecr.io/web:latest'
        imageName: $(RegistryName)/$(webRepository):$(build.buildId)
